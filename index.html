@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timika Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <style>
+        #map {
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([-4.546759, 136.8837207], 13);
+
+        // Add a tile layer (OpenStreetMap tiles)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Add markers for places in Timika
+        const places = [
+            {name: "Hotel Serayu", coords: [-4.548, 136.883]},
+            {name: "Noken Hotel Timika", coords: [-4.549, 136.884]},
+            {name: "Timika Mall", coords: [-4.550, 136.885]}
+        ];
+
+        places.forEach(place => {
+            L.marker(place.coords).addTo(map)
+                .bindPopup(place.name)
+                .openPopup();
+        });
+
+        // Optional: Adding a legend or controls
+        L.control.scale().addTo(map);
+    </script>
+
+</body>
+</html>
